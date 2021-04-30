@@ -1,6 +1,5 @@
 * {box-sizing: border-box;}
-.logo{width:50px}
-body {
+.logo{width:100px ; float: left;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -51,4 +50,12 @@ body {
   .header-right {
     float: none;
   }
+}
+.profileInfo{
+  padding-top: 50px;
+  width: 40%;
+  margin: auto;
+  border: grey 2px solid ;
+border-radius: 5px;
+box-shadow: 5px 10px  #888888;
 }

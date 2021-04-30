@@ -6,11 +6,13 @@
 
 # Setup and Running
 * clone down the repo.
-* Refer to the [application.properties](src/main/resources/application.properties) file for of what is necessary to * setup the app to work with a database.
+* Refer to the [application.properties](src/main/resources/application.properties) file for of what is necessary to setup the app to work with a database.
 * The app can be run running `./gradlew bootRun` in the terminal.
-* 
- # Routes
 
+ # Routes
+* `/` : home page 
  * `/myprofile` : To show a profile user which contain details of the user basic info and brief bio .
  * `/signup` :  To create a new account .
  * `/login` : let the user log in to him/her profile 
+ * `/users/{id}` : which allows viewing the data about a single user.
+ * `/feed` : To view all of the posts from the users that they follow.

@@ -10,6 +10,23 @@ public class Post {
     private String body;
     @ManyToOne
     private ApplicationUser postedBy;
+    private String createdAt;
+    public Post(ApplicationUser postedBy, String body, String createdAt) {
+        this.body=body;
+        this.postedBy=postedBy;
+        this.createdAt=createdAt;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Post(String postedBy, String body) {
+    }
 
     public int getId() {
         return id;
