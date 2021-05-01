@@ -1,6 +1,5 @@
 package com.example.codefellowship;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,87 +13,76 @@ public class ApplicationUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String password;
-    @Column(unique = true)
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String dateOfBirth;
-    private String bio;
+    long id;
 
-    public ApplicationUser(){
+    String username;
+    String password;
+    String firstname;
+    String lastname;
+    String dateofbirth;
+    String bio;
 
-    }
-//    @OneToMany(mappedBy = "applicationUser")
-//    Set usersFollowers;
-//@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//List<Post> posts;
-//
-//
-//    public List<Post> getPosts() {
-//        return posts;
-//    }
-    public ApplicationUser(String userName,String password,String firstName,String lastName,String dateOfBirth,String bio){
-        this.username = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName= lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.bio= bio;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    List<Post> posts;
 
+    @ManyToMany
+    @JoinTable(
+            name="posters_and_followers",
+            joinColumns = { @JoinColumn(name="follower") },
+            inverseJoinColumns = { @JoinColumn(name = "poster")}
+    )
+    Set<ApplicationUser> usersIFollow;
+
+    @ManyToMany(mappedBy = "usersIFollow")
+    Set<ApplicationUser> usersFollowingMe;
+
+    public void followUser(ApplicationUser followedUser){
+
+        usersIFollow.add(followedUser);
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    public ApplicationUser() {}
 
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setUsername(String username) {
+    public ApplicationUser(String username,
+                           String password,
+                           String firstname,
+                           String lastname,
+                           String dateofbirth,
+                           String bio) {
         this.username = username;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setBio(String bio) {
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateofbirth = dateofbirth;
         this.bio = bio;
     }
 
-    public String getFirstName(){
-        return this.firstName;
+    public List<Post> getPosts() {
+        return posts;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return dateofbirth;
     }
 
     public String getBio() {
         return bio;
     }
 
+    public long getId() { return id; }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
     @Override
     public String getPassword() {
@@ -128,6 +116,19 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String toString() {
-        return "this is user "+ this.username;
+        return "ApplicationUser{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", dateofbirth='" + dateofbirth + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
+
+    public Set<ApplicationUser> getUsersIFollow() {
+        return usersIFollow;
+    }
+
+    public Set<ApplicationUser> getUsersFollowingMe() {
+        return usersFollowingMe;
     }
 }

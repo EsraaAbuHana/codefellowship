@@ -11,8 +11,10 @@
 
  # Routes
 * `/` : home page 
- * `/myprofile` : To show a profile user which contain details of the user basic info and brief bio .
+ * `/userProfile` : To show a profile user which contain details of the user basic info and brief bio .
  * `/signup` :  To create a new account .
  * `/login` : let the user log in to him/her profile 
- * `/users/{id}` : which allows viewing the data about a single user.
+ * `/user/{id}` : which allows viewing the data about a single user.
  * `/feed` : To view all of the posts from the users that they follow.
+ * `/addPost`: To create a new post .
+ * `/allUsers`: To display  users and follow them.

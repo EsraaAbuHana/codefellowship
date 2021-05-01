@@ -6,47 +6,41 @@ import javax.persistence.*;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String body;
+    long id;
+
     @ManyToOne
-    private ApplicationUser postedBy;
-    private String createdAt;
-    public Post(ApplicationUser postedBy, String body, String createdAt) {
-        this.body=body;
-        this.postedBy=postedBy;
-        this.createdAt=createdAt;
+    ApplicationUser owner;
+
+    private String body;
+    private String timeStamp;
+
+    public Post() {}
+
+    public Post(String body, String timeStamp, ApplicationUser owner) {
+        this.body = body;
+        this.timeStamp = timeStamp;
+        this.owner = owner;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Post(String postedBy, String body) {
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-
+    public ApplicationUser getOwner() {
+        return owner;
+    }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
-    public ApplicationUser getPostedBy() {
-        return postedBy;
+    public String toString() {
+        return String.format("At %s, %s wrote: %s ", this.timeStamp, this.owner.getUsername(), this.body);
     }
 
-    public void setPostedBy(ApplicationUser postedBy) {
-        this.postedBy = postedBy;
-    }
+
 }

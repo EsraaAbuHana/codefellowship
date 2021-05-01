@@ -1,37 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/login.css">
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-  <title>Sign in</title>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+
+
 </head>
 <body>
-<form method="POST" action="/signup">
-    <label for="username">User name</label>
-    <input id="username" name="username" type="text">
 
-    <label for="password">password</label>
-    <input id="password" name="password" type="text">
+<header>
+    <nav th:if="${username}">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li> <a href="/addPost">Add Post</a></li>
+            <li> <a href="/userprofile">See Your Profile</a></li>
+            <li><a href="/users">See All Users</a></li>
+            <li><a href="/feed">View Your Feed</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li><h1>Hello, [[${username}]]!</h1></li>
+        </ul>
 
-    <label for="firstName">firstName</label>
-    <input id="firstName" name="firstName" type="text">
+    </nav>
+    <nav th:unless="${username}">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">login</a></li>
+            <li><a href="/signup">signup</a></li>
+        </ul>
 
-    <label for="lastName">lastName</label>
-    <input id="lastName" name="lastName" type="text">
 
-    <label for="dateOfBirth">dateOfBirth</label>
-    <input id="dateOfBirth" name="dateOfBirth" type="date">
+    </nav>
+</header>
 
-    <label for="bio">bio</label>
-    <input id="bio" name="bio" type="text">
 
-    <button type="submit">Submit</button>
+<h2 style="text-align:center; color:white; font-size:xx-large">Sign Up!</h2>
+<form action="/signup" method="post" style="text-align:center;  width: 650px; margin-left:auto; margin-right:auto">
+
+    <label for="username" style="color:white; font-size:x-large">UserName</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="firstname" style="color:white; font-size:x-large">First Name</label>
+    <input type="text" id="firstname" name="firstname">
+    <br>
+    <label for="lastname" style="color:white; font-size:x-large">Last Name</label>
+    <input type="text" id="lastname" name="lastname">
+    <br>
+    <label for="pass" style="color:white; font-size:x-large">Password</label>
+    <input type="password" id="pass" name="password">
+    <br>
+    <label for="dateofbirth" style="color:white; font-size:x-large">Date Of Birth</label>
+    <input type="date" id="dateofbirth" name="dateofbirth">
+    <br>
+    <label for="bio" style="color:white; font-size:x-large">Bio</label>
+    <textarea name="bio" id="bio" rows="5" cols="14"></textarea>
+    <br>
+    <input type="submit" name="submit" value="Submit">
 
 </form>
- 
+
 </body>
 </html>

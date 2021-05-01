@@ -1,4 +1,6 @@
-package com.example.codefellowship;
+package com.example.codefellowship.other;
+
+import com.example.codefellowship.ApplicationUser;
 
 import javax.persistence.*;
 
