@@ -1,5 +1,6 @@
 package com.example.codefellowship;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,16 +13,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
-    // polymorphism
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
 
-        if (applicationUser == null) {
+        if(applicationUser == null){
             System.out.println("User not found");
-            throw new UsernameNotFoundException("User " + username + " does not exist");
+            throw new UsernameNotFoundException("User "+ username+" dose not exist");
         }
-        System.out.println("User " + username + " found");
+        System.out.println("User "+username+" found");
         return applicationUser;
     }
 }

@@ -1,53 +1,61 @@
 package com.example.codefellowship;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Set;
 
 @Controller
 public class PostController {
-
     @Autowired
     ApplicationUserRepository applicationUserRepository;
+
     @Autowired
     PostRepository postRepository;
-//    @GetMapping("/post")
-//    public String getSignUpPage(){
-//        return "post.html";
-//    }
-
-//    @PostMapping("/post")
-//    public RedirectView post(
-//            @RequestParam(value="postedBy") String postedBy,
-//            @RequestParam(value="createdAt") String createdAt,
-//            @RequestParam(value="body") String body ){
-//       Post newPost = new Post(postedBy,body,createdAt);
-//        newPost = postRepository.save(newPost);
-//
-//        return new RedirectView("/post");
-//    }
 
 
+    @GetMapping("/addPost")
+    public String showAddPost(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("username", p.getName());
+        }
+        return "addPost";
+    }
 
     @PostMapping("/addPost")
-    public RedirectView addPost(@RequestParam String body, Principal p){
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
-        String formatDateTime = now.format(format);
-        ApplicationUser user=applicationUserRepository.findByUsername(p.getName());
-        Post post =new Post(user,formatDateTime,body);
+    public RedirectView addPost(Principal p, String body) {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date timeStamp = new Date();
+
+        ApplicationUser theUser = applicationUserRepository.findByUsername(p.getName());
+        Post post = new Post(body, dateFormat.format(timeStamp), theUser);
         postRepository.save(post);
-        return  new RedirectView("/myprofile");
+
+        return new RedirectView("/user/" + theUser.getId());
+    }
+
+    @GetMapping("/feed")
+    public String showFeed(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("username", p.getName());
+        }
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(p.getName());
+
+        Set<ApplicationUser> followerList = currentUser.getUsersIFollow();
+
+        m.addAttribute("peopleIfollowList", followerList);
+
+        m.addAttribute("username", p.getName());
+        return "feed";
+
     }
 }

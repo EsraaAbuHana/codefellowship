@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+<body>
+
+<header>
+  <nav th:if="${username}">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li> <a href="/addPost">Add Post</a></li>
+      <li> <a href="/userprofile">See Your Profile</a></li>
+      <li><a href="/users">See All Users</a></li>
+      <li><a href="/feed">View Your Feed</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <li><h1>Hello, [[${username}]]!</h1></li>
+    </ul>
+
+  </nav>
+  <nav th:unless="${username}">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/login">login</a></li>
+      <li><a href="/signup">signup</a></li>
+    </ul>
+
+
+  </nav>
+</header>
+
+
+<div style="text-align:center; margin-left:auto; margin-right:auto;  width:750px; margin-bottom:20px">
+  <h1>Welcome to [[${user.firstname}]] 's profile</h1>
+  <p style="color:white; font-size:x-large">My information:</p>
+  <p style="color:white; font-size:x-large"> First name: <span th:text="${user.username}"></span></p>
+  <p style="color:white; font-size:x-large">Last name <span th:text="${user.lastname}"></span></p>
+  <p style="color:white; font-size:x-large">Date of birth: <span th:text="${user.dateOfBirth}"></span></p>
+  <p style="color:white; font-size:x-large">Bio: <span th:text="${user.bio}"></span></p>
+
+
+
+
+  <h2>My Recent Posts</h2>
+  <br>
+  <br>
+  <ul>
+    <li th:each="post : ${user.posts}" th:text="${post}"></li>
+  </ul>
+</div>
+
+
+</body>
+</html>
