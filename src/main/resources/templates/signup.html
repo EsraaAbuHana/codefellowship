@@ -1,63 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../reset.css">
+
     <title>Title</title>
     <link rel="stylesheet" href="style.css">
+    <title>Signup</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-image: url(https://studydatascience.org/wp-content/uploads/2019/11/14524476_1194944463932041_1989977905496402384_o.jpg);
+            background-size: cover;
+            background-color: #717171;
 
+        }
+
+        header {
+            width: 100%;
+            height: 126px;
+            background: white;
+            /* color: red; */
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h1 {
+            justify-content: left;
+
+            text-align: left;
+            color: crimson;
+            font-size: xxx-large;
+            margin-left: 11px;
+            margin-top: 123px;
+        }
+
+        ul {
+            display: flex;
+            padding: 40px;
+            justify-content: space-between;
+        }
+
+        li {
+            padding: 25px;
+            list-style: none;
+
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            font-size: 21px;
+            /* width: 51px; */
+            background: #dc143c1a;
+        }
+
+        a {
+            text-decoration: none;
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .name {
+            margin-top: 52px;
+            font-size: xxx-large;
+            padding: 10px;
+            text-align: center;
+            top: auto;
+        }
+        .logForm{
+            background-color: #dc143c99;
+    margin-top: 95px;
+    border: solid;
+    border-radius: 6px;
+    width: 40%;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.button{
+    height: 47px;
+    margin: 45px;
+    color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: larger;
+    background-color: white;
+    width: 100px;
+    border: 2px solid black;
+    font-size: x-large;
+    border-radius: 20px;
+    text-align: center;
+}
+    .logo{
+  width: 121px;
+height: min-content;}
+    </style>
 
 </head>
+
+
 <body>
 
+
 <header>
-    <nav th:if="${username}">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li> <a href="/addPost">Add Post</a></li>
-            <li> <a href="/userprofile">See Your Profile</a></li>
-            <li><a href="/users">See All Users</a></li>
-            <li><a href="/feed">View Your Feed</a></li>
-            <li><a href="/logout">Logout</a></li>
-            <li><h1>Hello, [[${username}]]!</h1></li>
-        </ul>
+    <div class="container" th:if="${username}">
+        <div>
+            <h2 class="name"><a href="/userprofile">[[${username}]]!</a></h2>
+        </div>
+        <div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/addPost">Add Post</a></li>
+                <li><a href="/users"> Users</a></li>
+                <li><a href="/feed"> Feed</a></li>
+                <li><a href="/logout">Logout</a></li>
 
-    </nav>
-    <nav th:unless="${username}">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">login</a></li>
-            <li><a href="/signup">signup</a></li>
-        </ul>
+                <!--                            <li><h2>Hello, [[${username}]]!</h2></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="container" th:unless="${username}">
+        <div>
+            <img class="logo" src="https://avatars.githubusercontent.com/u/3904529?s=200&v=4">
+        </div>
+        <div>
 
-
-    </nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">login</a></li>
+                <li><a href="/signup">signup</a></li>
+            </ul>
+        </div>
+    </div>
 </header>
 
+    <body >
 
-<h2 style="text-align:center; color:white; font-size:xx-large">Sign Up!</h2>
+
+<!--        <h2 style="text-align:center; color:white; font-size:xx-large">Login!</h2>-->
+<div class="logForm">
 <form action="/signup" method="post" style="text-align:center;  width: 650px; margin-left:auto; margin-right:auto">
 
     <label for="username" style="color:white; font-size:x-large">UserName</label>
     <input type="text" id="username" name="username">
     <br>
+    <br>
     <label for="firstname" style="color:white; font-size:x-large">First Name</label>
     <input type="text" id="firstname" name="firstname">
     <br>
-    <label for="lastname" style="color:white; font-size:x-large">Last Name</label>
+    <br>    <label for="lastname" style="color:white; font-size:x-large">Last Name</label>
     <input type="text" id="lastname" name="lastname">
     <br>
-    <label for="pass" style="color:white; font-size:x-large">Password</label>
+    <br>    <label for="pass" style="color:white; font-size:x-large">Password</label>
     <input type="password" id="pass" name="password">
     <br>
-    <label for="dateofbirth" style="color:white; font-size:x-large">Date Of Birth</label>
+    <br>    <label for="dateofbirth" style="color:white; font-size:x-large">Date Of Birth</label>
     <input type="date" id="dateofbirth" name="dateofbirth">
     <br>
-    <label for="bio" style="color:white; font-size:x-large">Bio</label>
-    <textarea name="bio" id="bio" rows="5" cols="14"></textarea>
+    <br>    <label for="bio" style="color:white; font-size:x-large">Bio</label>
+    <textarea name="bio" id="bio" rows="3" cols="30"></textarea>
     <br>
-    <input type="submit" name="submit" value="Submit">
+    <br>    <input class="button" type="submit" name="submit" value="Signup">
 
 </form>
-
+</div>
 </body>
 </html>
