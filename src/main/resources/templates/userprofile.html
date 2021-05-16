@@ -1,75 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="../reset.css">
+
   <title>Title</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Login</title>
   <style>
-        * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    }
+        body {
+        color:white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #7171714a;
 
+        }
 
-    header {
-    width: 100%;
-    height: 12vh;
-    background: white;
-
-    }
-
-    nav {
-    margin-left: 10%;
-    }
-
-    nav ul {
+        header {
+            width: 100%;
+            height: 126px;
+            background: white;
+            /* color: red; */
+        }
+.container , .container div{
     display: flex;
-    padding: 40px;
     justify-content: space-between;
-    }
+    flex-direction: row;
+}
+        .container2 {
 
-    nav ul li {
-    list-style: none;
-    }
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: row;
+        }
 
-    nav ul li a {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 15px;
-    text-align:center;
-    }
+         .container2 p{
+          text-align: center;
+          margin-top: 50px;
+        color: black;       }
 
-   </style>
+        a {
+            text-decoration: none;
+        }
 
+        h1 {
+            justify-content: left;
 
+            text-align: left;
+            color: crimson;
+            font-size: xxx-large;
+            margin-left: 11px;
+            margin-top: 40px;        }
+
+        ul {
+            display: flex;
+            padding: 40px;
+            justify-content: space-between;
+        }
+
+        li {
+            padding: 25px;
+            list-style: none;
+
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            font-size: 21px;
+            /* width: 51px; */
+            background: #dc143c1a;
+        }
+
+        a {
+            text-decoration: none;
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .name {
+            margin-top: 52px;
+            font-size: xxx-large;
+            padding: 10px;
+            text-align: center;
+            top: auto;
+        }
+        .logForm{
+            background-color: #dc143c99;
+    margin-top: 185px;
+    border: solid;
+    border-radius: 6px;
+    width: 40%;
+    height: 220px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button{
+    height: 47px;
+    margin: 45px;
+    color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: larger;
+    background-color: white;
+    width: 100px;
+    border: 2px solid black;
+    font-size: x-large;
+    border-radius: 20px;
+    text-align: center;
+}
+.profile{
+  border-radius: 130px;
+
+      float: left;
+      width: 150px;
+      margin-top: 15px;
+      margin-left: 15px;
+      margin-bottom: 15px;
+  }
+  .logo{
+  width: 121px;
+height: min-content;}
+
+    </style>
 
 </head>
-<body style="background-color:#BD5A61;">
+
+
+<body>
+
 
 <header>
-  <nav th:if="${username}">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li> <a href="/addPost">Add Post</a></li>
-      <li> <a href="/userprofile">See Your Profile</a></li>
-      <li><a href="/users">See All Users</a></li>
-      <li><a href="/feed">View Your Feed</a></li>
-      <li><a href="/logout">Logout</a></li>
-      <li><h1>Hello, [[${username}]]!</h1></li>
-    </ul>
 
-  </nav>
-  <nav th:unless="${username}">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/login">login</a></li>
-      <li><a href="/signup">signup</a></li>
-    </ul>
+  <div class="container" th:if="${username}">
+    <div>
+      <img class="logo" src="https://avatars.githubusercontent.com/u/3904529?s=200&v=4">
 
+      <h2 class="name"><a href="/userprofile">[[${username}]]!</a></h2>
+    </div>
+    <div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/addPost">Add Post</a></li>
+        <li><a href="/users"> Users</a></li>
+        <li><a href="/feed"> Feed</a></li>
+        <li><a href="/logout">Logout</a></li>
 
-  </nav>
+        <!--                            <li><h2>Hello, [[${username}]]!</h2></li>-->
+      </ul>
+    </div>
+  </div>
+  <div th:unless="${username}">
+    <div>
+      <img class="logo" src="https://avatars.githubusercontent.com/u/3904529?s=200&v=4">
+    </div>
+    <div>
+
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">login</a></li>
+        <li><a href="/signup">signup</a></li>
+      </ul>
+    </div>
+  </div>
 </header>
-
 
 <div style="text-align:center; margin-left:auto; margin-right:auto;  width:750px; margin-bottom:20px">
   <h1>Welcome to [[${user.firstname}]] 's profile</h1>
